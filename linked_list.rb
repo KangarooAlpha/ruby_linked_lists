@@ -13,8 +13,8 @@ class LinkedList
       @head.tail = node
       return @tail = node
     end
-    #@tail.tail = node
-    #@tail = node
+    @tail.tail = node
+    @tail = node
   end
 
   def prepend(val)
@@ -48,14 +48,31 @@ class LinkedList
   end
 
   def pop
-    @tail.head = nil
+    return nil if @tail.tail == nil
   end
 
-  def contains?(val)
-    until @head.tail.nil?
-      return true if @head.head == val
-      @head = @head.tail
+  def contains?(val, node = @head)
+    unless node.tail.nil?
+      return true if node.head == val
+      contains?(val, node.tail)
+    else
+      return false
     end
-    return false
+  end
+
+  def find(val, node = @head ,ind = 0)
+    unless node.tail.nil?
+      return ind if node.head == val
+      ind +=1
+      @head = @head.tail
+    else
+      return nil
+    end
+  end
+
+  def to_s(node = @head, str = "")
+    return str += "( #{node.head} ) -> nil" if node.tail.nil?
+    str += "( #{node.head} ) -> "
+    to_s(node.tail, str)
   end
 end

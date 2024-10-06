@@ -10,6 +10,15 @@ p a.head
 p a.tail
 p a.at(3)
 p a
+
 a.pop
 p a
 p a.contains?("banana")
+p a
+p a.find("cat")
+a.append("apple")
+a.append("banana")
+a.prepend("cat")
+a.append("banana")
+p a
+p a.to_s
